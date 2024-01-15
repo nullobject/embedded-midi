@@ -3,7 +3,7 @@
 #![no_std]
 #![warn(missing_debug_implementations)]
 use core::fmt::Debug;
-use embedded_hal::serial;
+use embedded_io::Read;
 use midi_convert::midi_types::MidiMessage;
 
 use midi_convert::{
@@ -22,7 +22,7 @@ pub struct MidiIn<RX> {
 
 impl<RX, E> MidiIn<RX>
 where
-    RX: serial::Read<u8, Error = E>,
+    RX: Read,
     E: Debug,
 {
     pub fn new(rx: RX) -> Self {
